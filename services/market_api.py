@@ -129,4 +129,4 @@ def get_market_caps():
 
             }
 
-        ])giit 
+        ])
