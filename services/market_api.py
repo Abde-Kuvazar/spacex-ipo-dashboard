@@ -1,82 +1,132 @@
-import yfinance as yf
 import pandas as pd
-from utils.helper import format_market_cap
+import yfinance as yf
 
-SPACEX_VALUATION = 450_000_000_000
-SPACEX_IPO_SIZE = 35_000_000_000
-
-COMPANIES = {
-    "Apple": "AAPL",
-    "Microsoft": "MSFT",
-    "Nvidia": "NVDA",
-    "Amazon": "AMZN",
-    "Alphabet": "GOOGL",
-    "Tesla": "TSLA"
-}
-
-COMPANY_SECTORS = {
-
-    "Apple":"Technology",
-
-    "Microsoft":"Technology",
-
-    "Nvidia":"AI",
-
-    "Alphabet":"Technology",
-
-    "Amazon":"Consumer",
-
-    "Tesla":"EV"
-
-}
 
 def get_market_caps():
 
-    rows = []
+    companies = {
 
-    for company, ticker in COMPANIES.items():
+        "Apple": "AAPL",
+        "Microsoft": "MSFT",
+        "Nvidia": "NVDA",
+        "Alphabet": "GOOG",
+        "Amazon": "AMZN",
+        "Tesla": "TSLA"
 
-        info = yf.Ticker(ticker).info
-        market_cap = info.get("marketCap", 0)
-
-        rows.append({
-
-            "Company":company,
-
-            "Ticker":ticker,
-
-            "Sector":COMPANY_SECTORS[company],
-
-            "Market Cap":format_market_cap(market_cap),
-
-            "Raw Market Cap":market_cap
-
-        })
-
-    df = pd.DataFrame(rows)
-
-    return df
-
-def add_spacex(df, valuation):
-
-    spacex_market_cap = valuation
-
-    spacex_row = {
-        "Company": "🚀 SpaceX",
-        "Ticker": "SPACEX",
-        "Market Cap": format_market_cap(spacex_market_cap),
-        "Raw Market Cap": spacex_market_cap
     }
 
-    df.loc[len(df)] = spacex_row
+    rows = []
 
-    df = df.sort_values(
-        by="Raw Market Cap",
-        ascending=False
-    ).reset_index(drop=True)
+    try:
 
-    return df[["Company", "Ticker", "Market Cap", "Raw Market Cap"]]
+        for company, ticker in companies.items():
 
+            info = yf.Ticker(ticker).info
 
+            rows.append({
 
-    return df.iloc[0]["Company"]
+                "Company": company,
+
+                "Ticker": ticker,
+
+                "Sector": info.get("sector", "Technology"),
+
+                "Market Cap": f"${info.get('marketCap',0)/1e9:.0f}B",
+
+                "Raw Market Cap": info.get("marketCap",0)
+
+            })
+
+        return pd.DataFrame(rows)
+
+    except Exception:
+
+        # ---------- FALLBACK ----------
+
+        return pd.DataFrame([
+
+            {
+
+                "Company":"Apple",
+
+                "Ticker":"AAPL",
+
+                "Sector":"Technology",
+
+                "Market Cap":"$4300B",
+
+                "Raw Market Cap":4300e9
+
+            },
+
+            {
+
+                "Company":"Microsoft",
+
+                "Ticker":"MSFT",
+
+                "Sector":"Technology",
+
+                "Market Cap":"$3900B",
+
+                "Raw Market Cap":3900e9
+
+            },
+
+            {
+
+                "Company":"Nvidia",
+
+                "Ticker":"NVDA",
+
+                "Sector":"Technology",
+
+                "Market Cap":"$4200B",
+
+                "Raw Market Cap":4200e9
+
+            },
+
+            {
+
+                "Company":"Alphabet",
+
+                "Ticker":"GOOG",
+
+                "Sector":"Technology",
+
+                "Market Cap":"$2400B",
+
+                "Raw Market Cap":2400e9
+
+            },
+
+            {
+
+                "Company":"Amazon",
+
+                "Ticker":"AMZN",
+
+                "Sector":"Consumer",
+
+                "Market Cap":"$2500B",
+
+                "Raw Market Cap":2500e9
+
+            },
+
+            {
+
+                "Company":"Tesla",
+
+                "Ticker":"TSLA",
+
+                "Sector":"Automotive",
+
+                "Market Cap":"$1000B",
+
+                "Raw Market Cap":1000e9
+
+            }
+
+        ])giit 
