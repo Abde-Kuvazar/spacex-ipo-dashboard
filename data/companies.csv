@@ -1,0 +1,11 @@
+Company,Sector,Exposure
+Rocket Lab,Launch Services,0.95
+Planet Labs,Satellite,0.90
+Palantir,AI Infrastructure,0.68
+Lockheed Martin,Defense,0.72
+L3Harris,Defense,0.66
+Boeing,Legacy Aerospace,-0.78
+Virgin Galactic,Legacy Aerospace,-0.88
+Iridium,Satellite,0.52
+SES,Telecom,-0.35
+Tesla,EV,-0.18

@@ -1,0 +1,9 @@
+Sector,Exposure,Correlation,CapitalRotation
+Launch Services,0.95,0.90,0.92
+Satellite,0.90,0.88,0.86
+Defense,0.75,0.72,0.70
+AI Infrastructure,0.60,0.68,0.58
+Technology,0.55,0.65,0.60
+Telecom,-0.35,-0.28,-0.22
+EV,-0.18,-0.20,-0.15
+Legacy Aerospace,-0.82,-0.75,-0.78

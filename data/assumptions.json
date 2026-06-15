@@ -1,0 +1,8 @@
+{
+    "sp500_market_cap": 55000,
+    "nasdaq_market_cap": 30000,
+    "passive_assets": 12000,
+    "default_float": 15,
+    "base_ipo_size": 35,
+    "institutional_demand": "High"
+}
